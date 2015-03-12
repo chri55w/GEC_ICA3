@@ -34,7 +34,7 @@
     <ClCompile Include="Src\StateHandler.cpp">
       <Filter>State Machine\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AIMap.cpp">
+    <ClCompile Include="Src\AIMap.cpp">
       <Filter>AI Mapping\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -48,7 +48,7 @@
     <ClInclude Include="Src\StateHandler.h">
       <Filter>State Machine\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AIMap.h">
+    <ClInclude Include="Src\AIMap.h">
       <Filter>AI Mapping\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

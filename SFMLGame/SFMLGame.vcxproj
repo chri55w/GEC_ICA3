@@ -19,13 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AIMap.cpp" />
+    <ClCompile Include="Src\AIMap.cpp" />
     <ClCompile Include="Src\Main.cpp" />
     <ClCompile Include="Src\MenuState.cpp" />
     <ClCompile Include="Src\StateHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AIMap.h" />
+    <ClInclude Include="Src\AIMap.h" />
     <ClInclude Include="Src\MenuState.h" />
     <ClInclude Include="Src\State.h" />
     <ClInclude Include="Src\StateHandler.h" />
