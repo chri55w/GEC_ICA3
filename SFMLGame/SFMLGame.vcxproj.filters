@@ -16,6 +16,15 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="AI Mapping">
+      <UniqueIdentifier>{a9e1af92-8c27-43b2-ac38-4d2d69ca3c89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI Mapping\Header Files">
+      <UniqueIdentifier>{5d37b9f8-bdf8-4f15-b5cb-f1047a91013c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI Mapping\Source Files">
+      <UniqueIdentifier>{dbe56968-7df3-401f-930d-3768ee2a2d07}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Main.cpp" />
@@ -24,6 +33,9 @@
     </ClCompile>
     <ClCompile Include="Src\StateHandler.cpp">
       <Filter>State Machine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AIMap.cpp">
+      <Filter>AI Mapping\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -35,6 +47,9 @@
     </ClInclude>
     <ClInclude Include="Src\StateHandler.h">
       <Filter>State Machine\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AIMap.h">
+      <Filter>AI Mapping\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
