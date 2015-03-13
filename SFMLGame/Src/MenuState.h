@@ -13,7 +13,7 @@ class CMenuState : public CState {
 		void onEnter();
 		void onExit();
 		void onUpdate();
-		void onRender(sf::RenderWindow& window);
+		void onRender(sf::RenderWindow& window, int s_height, int s_width);
 
 	private:
 		sf::Font font;

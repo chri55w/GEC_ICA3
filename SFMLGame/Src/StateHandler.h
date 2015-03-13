@@ -11,7 +11,7 @@ public:
 
 	void initState(std::string stateName, CState *newState);
 	void destroyState(std::string stateName);
-	void renderCurrState(sf::RenderWindow& window);
+	void renderCurrState(sf::RenderWindow& window, int s_height, int s_width);
 	void updateCurrState();
 	void changeState(std::string stateName);
 

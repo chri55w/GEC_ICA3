@@ -20,12 +20,8 @@ int main() {
 	int screenHeight = 900;
 	int screenWidth = 650;
 
-	//Fetch Map Size
-
-	//Update Screen Size to Border Map if possible
-
 	//Render Window using screen dimensions
-	sf::RenderWindow window(sf::VideoMode(screenWidth, screenHeight), "RTT Path Planning Algorithm. AI - Chris Walters");
+	sf::RenderWindow window(sf::VideoMode(screenWidth, screenHeight), "RRT Path Planning Algorithm. AI - Chris Walters");
 
 	//Initialise All States
 	STATEHANDLER.initState("menuState", new CMenuState);
@@ -43,8 +39,7 @@ int main() {
 				window.close();
 		}
 		STATEHANDLER.updateCurrState();
-		STATEHANDLER.renderCurrState(window);
+		STATEHANDLER.renderCurrState(window, screenHeight, screenWidth);
 	}
-
 	return 0;
 }

@@ -35,7 +35,7 @@ void CMenuState::onEnter() {
 void CMenuState::onExit() {
 
 }
-void CMenuState::onRender(sf::RenderWindow& window) {
+void CMenuState::onRender(sf::RenderWindow& window, int s_height, int s_width) {
 	window.clear();
 	//render here
 	for (textObj text : menuTexts) {
@@ -145,7 +145,7 @@ void CMenuState::selectMenuItem() {
 		STATEHANDLER.changeState("gameState");
 		return;
 	} else {
-		std::cout << "Error: Unhandled Button Press with Text: " << std::string(selectedItem.text.getString()) << std::endl;
+		std::cerr << "Error: Unhandled Button Press with Text: " << std::string(selectedItem.text.getString()) << std::endl;
 		return;
 	}
 	std::cout << "Button Press Handled with Text: " << std::string(selectedItem.text.getString()) << std::endl;

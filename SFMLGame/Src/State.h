@@ -10,5 +10,5 @@ class CState {
 		virtual void onEnter() = 0;
 		virtual void onExit() = 0;
 		virtual void onUpdate() = 0;
-		virtual void onRender(sf::RenderWindow& window) = 0;
+		virtual void onRender(sf::RenderWindow& window, int s_height, int s_width) = 0;
 };

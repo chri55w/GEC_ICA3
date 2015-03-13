@@ -35,7 +35,7 @@ void CStateHandler::destroyState(std::string stateName) {
 		delete myStates_[stateName];
 		myStates_[stateName] = nullptr;
 	} else {
-		std::cout << "ERROR: Cannot Delete Non-Initialized or Null State! '" + stateName + "'" << std::endl;
+		std::cerr << "ERROR: Cannot Delete Non-Initialized or Null State! '" + stateName + "'" << std::endl;
 	}
 }
 //Change to a different state
@@ -47,7 +47,7 @@ void CStateHandler::changeState(std::string stateName) {
 		currentState = myStates_[stateName];
 		currentState->onEnter();
 	} else {
-		std::cout << "ERROR: Cannot Change to Non-Initialized or Null State! '" + stateName + "'" << std::endl;
+		std::cerr << "ERROR: Cannot Change to Non-Initialized or Null State! '" + stateName + "'" << std::endl;
 	}
 }
 //update the state you are currently in
@@ -57,8 +57,8 @@ void CStateHandler::updateCurrState() {
 	}
 }
 //render the state you are currently in
-void CStateHandler::renderCurrState(sf::RenderWindow& window) {
+void CStateHandler::renderCurrState(sf::RenderWindow& window, int s_height, int s_width) {
 	if (currentState != nullptr) {
-		currentState->onRender(window);
+		currentState->onRender(window, s_height, s_width);
 	}
 }

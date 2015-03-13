@@ -31,7 +31,7 @@ std::vector<std::string> CMapHandler::loadAllMapNames(std::string directory, std
 	HANDLE h = FindFirstFileA(filter.c_str(), &fd);
 	if (h != INVALID_HANDLE_VALUE) {
 		do {
-			fileNames.push_back(mapFilesDir + fd.cFileName);
+			fileNames.push_back(fd.cFileName);
 			std::cout << "Found Map: " << fd.cFileName << std::endl;
 
 		} while (FindNextFileA(h, &fd));
@@ -45,23 +45,74 @@ std::vector<std::string> CMapHandler::loadAllMapNames(std::string directory, std
 }
 
 void CMapHandler::parseMap(std::string mapName) {
-
 	std::ifstream fileReader;
+
 	fileReader.open(mapFilesDir + mapName);
 	if (!fileReader.good()) {
-		std::cout << "ERROR: Cannot Find Map File '" + mapFilesDir + mapName + "'" << std::endl;
+		std::cerr << "ERROR: Cannot Find Map File '" + mapFilesDir + mapName + "'" << std::endl;
 		STATEHANDLER.changeState("menuState");
 		return;
 	} else {
 		std::cout << "Successfully Loaded Map File '" + mapFilesDir + mapName + "'" << std::endl;
 	}
-	char c;
-	while (fileReader.get(c)) {          // loop getting single characters
-		if (c == '@') {
-			mapData.push_back(0);
-		} else if (c == '.') {
-			mapData.push_back(1);
+	bool parsingMapData = false;
+	while (!fileReader.eof()) {
+		std::string token;
+
+		fileReader >> token;
+		if (!parsingMapData) {
+			if (token == "type") {
+				//getMapType
+			} else if (token == "height") {
+				fileReader >> mapHeight;
+			} else if (token == "width") {
+				fileReader >> mapWidth;
+			} else if (token == "map") {	
+				parsingMapData = true;
+			}
+		} else if ((int)mapData.size() / mapWidth < mapHeight) {
+			while ((int)token.size() < mapWidth) {
+				token.push_back('@');
+			}
+			for (char c : token) {
+				if (c == '@' || c == '.' || c == 'W' || c == 'T') {
+					mapData.push_back(c);
+				}
+			}
 		}
 	}
 	fileReader.close();
+}
+
+std::vector<CMapHandler::mapPixel*> CMapHandler::getMapDrawData() {
+
+	std::vector<mapPixel*> drawData;
+
+	float currX = 0;
+	float currY = 0;
+
+	for (char data : mapData) {
+		if (data != '.') {
+			mapPixel *newMapPixel = new mapPixel();
+			newMapPixel->x_pos = currX;
+			newMapPixel->y_pos = currY;
+			if (data == '@') {
+				newMapPixel->pixel_colour = sf::Color::Red;
+			} else if (data == 'W') {
+				newMapPixel->pixel_colour = sf::Color::Blue;
+			} else if (data == 'T') {
+				newMapPixel->pixel_colour = sf::Color::Yellow;
+			}
+			drawData.push_back(newMapPixel);
+		}
+		
+		if (currX < 512-1) {
+			currX++;
+		} else {
+			currX = 0;
+			currY++;
+		}
+	}
+	return drawData;
+
 }
