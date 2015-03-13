@@ -12,10 +12,10 @@
 
 #include "StateHandler.h"
 #include "MenuState.h"
-#include "AIMap.h"
+#include "GameState.h"
+#include "MapHandler.h"
 
 int main() {
-	CAIMap *newMap = new CAIMap();
 
 	int screenHeight = 900;
 	int screenWidth = 650;
@@ -29,11 +29,10 @@ int main() {
 
 	//Initialise All States
 	STATEHANDLER.initState("menuState", new CMenuState);
+	STATEHANDLER.initState("gameState", new CGameState);
 
 	//Set Starting State
 	STATEHANDLER.changeState("menuState");
-
-	newMap->loadAllFiles();
 
 	//GameLoop
 	while (window.isOpen()) {

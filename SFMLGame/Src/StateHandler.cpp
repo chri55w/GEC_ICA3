@@ -35,7 +35,7 @@ void CStateHandler::destroyState(std::string stateName) {
 		delete myStates_[stateName];
 		myStates_[stateName] = nullptr;
 	} else {
-		//HAPI->UserMessage("ERROR: Cannot Delete Non-Initialized or Null State! '" + stateName + "'", "ERROR - State Error");
+		std::cout << "ERROR: Cannot Delete Non-Initialized or Null State! '" + stateName + "'" << std::endl;
 	}
 }
 //Change to a different state
@@ -47,7 +47,7 @@ void CStateHandler::changeState(std::string stateName) {
 		currentState = myStates_[stateName];
 		currentState->onEnter();
 	} else {
-		//HAPI->UserMessage("ERROR: Cannot Change to Non-Initialized or Null State! '" + stateName + "'", "ERROR - State Error");
+		std::cout << "ERROR: Cannot Change to Non-Initialized or Null State! '" + stateName + "'" << std::endl;
 	}
 }
 //update the state you are currently in
