@@ -5,6 +5,7 @@
 CMenuState::CMenuState() {
 	selectConditions.push_back(true);
 	selectConditions.push_back(false);
+	selectConditions.push_back(false);
 }
 
 CMenuState::~CMenuState() {
@@ -15,7 +16,11 @@ void CMenuState::onCreate() {
 	newText("Menu", font, 25, 15.0f, 125.0f);
 
 	newText("Select Map to Load", font, 15, 50.0f, 350.0f, true);
-	newText("Exit System", font, 15, 50.0f, 375.0f, true);
+	newText("Settings", font, 15, 50.0f, 375.0f, true);
+	newText("Exit System", font, 15, 50.0f, 400.0f, true);
+
+
+	newText("Force Surrounding Walls: False", font, 12, 200, 400, false, 2);
 
 	std::vector<std::string> mapNames = MAP.loadAllMapNames("..\\Maps", "map");
 	float yPos = 350.0f - (mapNames.size() * 15) / 2;
@@ -117,10 +122,16 @@ void CMenuState::tryMoveMenu(direction moveDir) {
 		case direction::LEFT:
 			if (selectConditions[1]) {
 				selectConditions[1] = false;
-				menuTexts[1].selectable = true;
-				menuTexts[2].selectable = true;
-				resetSelectedText();
+			} else if (selectConditions[2]) {
+				selectConditions[2] = false;
+			} else {
+				break;
 			}
+			menuTexts[1].selectable = true;
+			menuTexts[2].selectable = true;
+			menuTexts[3].selectable = true;
+			menuTexts[4].selectable = false;
+			resetSelectedText();
 			break;
 	}
 
@@ -131,17 +142,39 @@ void CMenuState::selectMenuItem() {
 
 	if (selectedItem.text.getString() == "Exit System") {
 		//Close
+		sf::Event::Closed;
 	} else if (selectedItem.text.getString() == "Select Map to Load") {
 		if (!selectConditions[1]) {
 			//Show Map Texts
 			selectConditions[1] = true;
 			menuTexts[1].selectable = false;
 			menuTexts[2].selectable = false;
+			menuTexts[3].selectable = false;
 			resetSelectedText();
 		}
+	} else if (selectedItem.text.getString() == "Settings") {
+		if (!selectConditions[2]) {
+			selectConditions[2] = true;
+			menuTexts[1].selectable = false;
+			menuTexts[2].selectable = false;
+			menuTexts[3].selectable = false;
+			menuTexts[4].selectable = true;
+			resetSelectedText();
+		}
+	} else if (stringContains(selectedItem.text.getString(), "Force Surrounding Walls:")) {
+		if (forceSurroundingWalls) {
+			forceSurroundingWalls = false;
+			menuTexts[selectedText].text.setString("Force Surrounding Walls: False");
+			std::cout << "Force Surrounding Walls Turned OFF" << std::endl;
+		} else {
+			forceSurroundingWalls = true;
+			menuTexts[selectedText].text.setString("Force Surrounding Walls: True");
+			std::cout << "Force Surrounding Walls Turned ON" << std::endl;
+		}
+
 	} else if (stringContains(selectedItem.text.getString(), ".map")) {
 		std::cout << "Calling Map Parser for Map: " << std::string(selectedItem.text.getString()) << std::endl;
-		MAP.parseMap(selectedItem.text.getString());
+		MAP.parseMap(selectedItem.text.getString(), forceSurroundingWalls);
 		STATEHANDLER.changeState("gameState");
 		return;
 	} else {

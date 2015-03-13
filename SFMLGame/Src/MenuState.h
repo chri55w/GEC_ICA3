@@ -30,6 +30,7 @@ class CMenuState : public CState {
 		std::vector<bool> selectConditions;
 
 		bool keyPressed = false;
+		bool forceSurroundingWalls = false;
 
 		int selectedText;
 

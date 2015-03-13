@@ -44,7 +44,7 @@ std::vector<std::string> CMapHandler::loadAllMapNames(std::string directory, std
 	return fileNames;
 }
 
-void CMapHandler::parseMap(std::string mapName) {
+void CMapHandler::parseMap(std::string mapName, bool forceWallEdge) {
 	std::ifstream fileReader;
 
 	fileReader.open(mapFilesDir + mapName);
@@ -75,6 +75,18 @@ void CMapHandler::parseMap(std::string mapName) {
 				token.push_back('@');
 			}
 			for (char c : token) {
+				if (forceWallEdge) {
+					if ((int)mapData.size() < mapWidth) { //Parsing Top Line
+						mapData.push_back('@');
+						continue;
+					} else if ((int)mapData.size() % mapWidth == 0 || mapData.size() % mapWidth == mapWidth - 1) { //Parsing either Left or Right edge
+						mapData.push_back('@');
+						continue;
+					} else if (mapData.size() > mapWidth * (mapHeight-1)) { //Parsing Bottom Line
+						mapData.push_back('@');
+						continue;
+					}
+				}
 				if (c == '@' || c == '.' || c == 'W' || c == 'T') {
 					mapData.push_back(c);
 				}
@@ -82,11 +94,10 @@ void CMapHandler::parseMap(std::string mapName) {
 		}
 	}
 	fileReader.close();
+	parseMapDrawData();
 }
 
-std::vector<CMapHandler::mapPixel*> CMapHandler::getMapDrawData() {
-
-	std::vector<mapPixel*> drawData;
+void CMapHandler::parseMapDrawData() {
 
 	float currX = 0;
 	float currY = 0;
@@ -103,7 +114,7 @@ std::vector<CMapHandler::mapPixel*> CMapHandler::getMapDrawData() {
 			} else if (data == 'T') {
 				newMapPixel->pixel_colour = sf::Color::Yellow;
 			}
-			drawData.push_back(newMapPixel);
+			mapDrawData.push_back(newMapPixel);
 		}
 		
 		if (currX < 512-1) {
@@ -113,6 +124,5 @@ std::vector<CMapHandler::mapPixel*> CMapHandler::getMapDrawData() {
 			currY++;
 		}
 	}
-	return drawData;
 
 }
