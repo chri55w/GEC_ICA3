@@ -16,6 +16,6 @@ class CGameState : public CState {
 		void onRender(sf::RenderWindow& window, int s_height, int s_width);
 
 	private:
-		sf::RectangleShape square;
+
 };
 

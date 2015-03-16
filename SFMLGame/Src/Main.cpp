@@ -20,6 +20,9 @@ int main() {
 	int screenHeight = 900;
 	int screenWidth = 650;
 
+	int frameRate = 0;
+	sf::Clock clock;
+
 	//Render Window using screen dimensions
 	sf::RenderWindow window(sf::VideoMode(screenWidth, screenHeight), "RRT Path Planning Algorithm. AI - Chris Walters");
 
@@ -40,6 +43,13 @@ int main() {
 		}
 		STATEHANDLER.updateCurrState();
 		STATEHANDLER.renderCurrState(window, screenHeight, screenWidth);
+		if (clock.getElapsedTime().asMilliseconds() > 1000) {
+			std::cout << "FPS: " << frameRate << std::endl;
+			clock.restart();
+			frameRate = 0;
+		} else {
+			frameRate++;
+		}
 	}
 	return 0;
 }

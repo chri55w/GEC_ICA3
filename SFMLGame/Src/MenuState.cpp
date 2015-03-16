@@ -20,7 +20,7 @@ void CMenuState::onCreate() {
 	newText("Exit System", font, 15, 50.0f, 400.0f, true);
 
 
-	newText("Force Surrounding Walls: False", font, 12, 200, 400, false, 2);
+	newText("Force Surrounding Walls: True", font, 12, 200, 400, false, 2);
 
 	std::vector<std::string> mapNames = MAP.loadAllMapNames("..\\Maps", "map");
 	float yPos = 350.0f - (mapNames.size() * 15) / 2;

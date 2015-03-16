@@ -14,10 +14,12 @@ CMapHandler & CMapHandler::getInstance() {
 }
 
 CMapHandler::CMapHandler() {
+
 }
 
 
 CMapHandler::~CMapHandler() {
+
 }
 
 std::vector<std::string> CMapHandler::loadAllMapNames(std::string directory, std::string extension) {

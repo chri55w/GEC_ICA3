@@ -25,6 +25,15 @@
     <Filter Include="AI Mapping\Source Files">
       <UniqueIdentifier>{dbe56968-7df3-401f-930d-3768ee2a2d07}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Node Systems">
+      <UniqueIdentifier>{de7cac72-aea8-4074-8dd4-671cceb717f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Node Systems\Header Files">
+      <UniqueIdentifier>{1eeb4a57-f7d6-4a33-8ad0-43c4fdaa5762}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Node Systems\Source Files">
+      <UniqueIdentifier>{a1f3d4a0-e25d-494d-a50e-6360c2dd603a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Main.cpp" />
@@ -39,6 +48,9 @@
     </ClCompile>
     <ClCompile Include="Src\GameState.cpp">
       <Filter>State Machine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\MenuNode.cpp">
+      <Filter>Node Systems\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -56,6 +68,9 @@
     </ClInclude>
     <ClInclude Include="Src\GameState.h">
       <Filter>State Machine\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\MenuNode.h">
+      <Filter>Node Systems\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
