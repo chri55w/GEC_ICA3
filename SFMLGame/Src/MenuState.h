@@ -1,5 +1,6 @@
 #pragma once
 #include "State.h"
+#include "MenuNode.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -16,6 +17,8 @@ class CMenuState : public CState {
 		void onRender(sf::RenderWindow& window, int s_height, int s_width);
 
 	private:
+		CMenuNode *currentNode_ = nullptr;
+
 		sf::Font font;
 		enum direction {UP, DOWN, LEFT};
 

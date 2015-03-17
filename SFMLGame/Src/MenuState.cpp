@@ -3,15 +3,28 @@
 #include "StateHandler.h"
 
 CMenuState::CMenuState() {
+	/*
 	selectConditions.push_back(true);
 	selectConditions.push_back(false);
 	selectConditions.push_back(false);
+	*/
 }
 
 CMenuState::~CMenuState() {
+
 }
 
 void CMenuState::onCreate() {
+
+	CMenuNode *loadMapNode = new CMenuNode(sf::Text("Load Map", font, 25), sf::Vector2f(50.0f, 50.0f), CMenuNode::NULLCALL);
+	currentNode_ = loadMapNode;
+
+	loadMapNode->addChildNode(sf::Text("Map One", font, 15), sf::Vector2f(200.0f, 50.0f), CMenuNode::STARTGAME);
+	loadMapNode->addChildNode(sf::Text("Map Two", font, 15), sf::Vector2f(200.0f, 75.0f), CMenuNode::STARTGAME);
+
+
+	
+	/*
 	font.loadFromFile("..\\Fonts\\ariel.ttf");
 	newText("Menu", font, 25, 15.0f, 125.0f);
 
@@ -29,7 +42,7 @@ void CMenuState::onCreate() {
 		yPos += 15;
 	}
 	resetSelectedText();
-
+	*/
 }
 void CMenuState::onDestroy() {
 
@@ -42,16 +55,31 @@ void CMenuState::onExit() {
 }
 void CMenuState::onRender(sf::RenderWindow& window, int s_height, int s_width) {
 	window.clear();
+	CMenuNode *renderNode = currentNode_;
+	while (renderNode->countChildren() > 0) {
+		for (int i = 0; i < renderNode->countChildren(); i++) {
+			window.draw(renderNode->fetchNode(i)->getText());
+		}
+		if (renderNode->getSelectedNode()->countChildren() > 0) {
+			renderNode = renderNode->getSelectedNode();
+		} else {
+			break;
+		}
+	}
 	//render here
+	/*
 	for (textObj text : menuTexts) {
 		if (selectConditions[text.selectCondition]) {
 			window.draw(text.text);
 		}
 	}
+	*/
+
 	window.display();
 
 }
 void CMenuState::onUpdate() {
+	/*
 	menuTexts[selectedText].text.setColor(sf::Color::White);
 	//Check for text button clicks
 	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
@@ -74,6 +102,7 @@ void CMenuState::onUpdate() {
 		}
 	}
 	menuTexts[selectedText].text.setColor(sf::Color::Red);	
+	*/
 }
 
 void CMenuState::newText(std::string text, sf::Font, int size, float xPos, float yPos, bool canSelect, int selectCondition) {
