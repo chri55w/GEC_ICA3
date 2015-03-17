@@ -17,7 +17,10 @@ class CMenuState : public CState {
 		void onRender(sf::RenderWindow& window, int s_height, int s_width);
 
 	private:
-		CMenuNode *currentNode_ = nullptr;
+		CMenuNode *loadMapNode = nullptr;
+		CMenuNode *settingsNode = nullptr;
+		CMenuNode *currentNode_ = nullptr; 
+		CMenuNode *rootNode_ = nullptr;
 
 		sf::Font font;
 		enum direction {UP, DOWN, LEFT};

@@ -6,6 +6,7 @@ CMenuNode::CMenuNode(sf::Text nodeText, sf::Vector2f pos, CMenuNode::callbackTyp
 	callID_ = buttonCallback;
 	position_ = pos;
 	nodeText_.setPosition(pos);
+	nodeText_.setColor(sf::Color::White);
 }
 
 CMenuNode::CMenuNode(sf::Text nodeText, sf::Vector2f pos, CMenuNode *parent, CMenuNode::callbackType buttonCallback) {
@@ -14,6 +15,7 @@ CMenuNode::CMenuNode(sf::Text nodeText, sf::Vector2f pos, CMenuNode *parent, CMe
 	callID_ = buttonCallback;
 	position_ = pos;
 	nodeText_.setPosition(pos);
+	nodeText_.setColor(sf::Color::White);
 }
 
 CMenuNode::~CMenuNode() {
@@ -24,6 +26,7 @@ CMenuNode::~CMenuNode() {
 
 void CMenuNode::addChildNode(sf::Text nodeText, sf::Vector2f pos, CMenuNode::callbackType buttonCallback) {
 	CMenuNode *newNode = new CMenuNode(nodeText, pos, buttonCallback);
+	newNode->parentNode_ = this;
 
 	childNodes_.push_back(newNode);
 
@@ -33,6 +36,7 @@ void CMenuNode::addChildNode(sf::Text nodeText, sf::Vector2f pos, CMenuNode::cal
 }
 
 void CMenuNode::selectNextNode() {
+	selectedNode_->nodeText_.setColor(sf::Color::White);
 	for (int i = 0; i < childNodes_.size(); i++) {
 		if (selectedNode_ == childNodes_[i]) {
 			if (i < childNodes_.size() - 1) {
@@ -40,12 +44,14 @@ void CMenuNode::selectNextNode() {
 			} else {
 				selectedNode_ = childNodes_[0];
 			}
+			selectedNode_->nodeText_.setColor(sf::Color::Red);
 			return;
 		}
 	}
 }
 
 void CMenuNode::selectPreviousNode() {
+	selectedNode_->nodeText_.setColor(sf::Color::White);
 	for (int i = 0; i < childNodes_.size(); i++) {
 		if (selectedNode_ == childNodes_[i]) {
 			if (i > 1) {
@@ -53,6 +59,7 @@ void CMenuNode::selectPreviousNode() {
 			} else {
 				selectedNode_ = childNodes_[childNodes_.size()-1];
 			}
+			selectedNode_->nodeText_.setColor(sf::Color::Red);
 			return;
 		}
 	}

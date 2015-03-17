@@ -16,12 +16,23 @@ CMenuState::~CMenuState() {
 
 void CMenuState::onCreate() {
 
-	CMenuNode *loadMapNode = new CMenuNode(sf::Text("Load Map", font, 25), sf::Vector2f(50.0f, 50.0f), CMenuNode::NULLCALL);
-	currentNode_ = loadMapNode;
+	font.loadFromFile("..\\Fonts\\ariel.ttf");
 
-	loadMapNode->addChildNode(sf::Text("Map One", font, 15), sf::Vector2f(200.0f, 50.0f), CMenuNode::STARTGAME);
+	rootNode_ = new CMenuNode();
+
+	rootNode_->addChildNode(sf::Text("Load Map", font, 25), sf::Vector2f(50.0f, 50.0f), CMenuNode::NULLCALL);
+	rootNode_->addChildNode(sf::Text("Settings", font, 25), sf::Vector2f(50.0f, 75.0f), CMenuNode::NULLCALL);
+	currentNode_ = rootNode_;
+
+	rootNode_->fetchNode(0)->addChildNode(sf::Text("Node 1-1", font, 15), sf::Vector2f(200.0f, 50.0f), CMenuNode::STARTGAME);
+	rootNode_->fetchNode(1)->addChildNode(sf::Text("Node 2-1", font, 15), sf::Vector2f(200.0f, 50.0f), CMenuNode::STARTGAME);
+	
+	/*
 	loadMapNode->addChildNode(sf::Text("Map Two", font, 15), sf::Vector2f(200.0f, 75.0f), CMenuNode::STARTGAME);
 
+	settingsNode = new CMenuNode(sf::Text("Settings", font, 25), sf::Vector2f(50.0f, 100.0f), CMenuNode::NULLCALL);
+
+	settingsNode->addChildNode(sf::Text("Force External Walls", font, 15), sf::Vector2f(200.0f, 50.0f), CMenuNode::FORCEWALLS);
 
 	
 	/*
@@ -55,7 +66,10 @@ void CMenuState::onExit() {
 }
 void CMenuState::onRender(sf::RenderWindow& window, int s_height, int s_width) {
 	window.clear();
-	CMenuNode *renderNode = currentNode_;
+
+	//window.draw(loadMapNode->getText());
+	
+	CMenuNode *renderNode = rootNode_;
 	while (renderNode->countChildren() > 0) {
 		for (int i = 0; i < renderNode->countChildren(); i++) {
 			window.draw(renderNode->fetchNode(i)->getText());
@@ -93,10 +107,10 @@ void CMenuState::onUpdate() {
 		} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
 			tryMoveMenu(UP);
 			keyPressed = true;
-		} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-			tryMoveMenu(DOWN);
-			keyPressed = true;
-		} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+		} else */
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+			currentNode_->selectNextNode();
+		}/* else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
 			tryMoveMenu(LEFT);
 			keyPressed = true;
 		}

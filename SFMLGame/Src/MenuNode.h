@@ -9,9 +9,10 @@ class CMenuNode {
 
 		enum callbackType { NULLCALL, STARTGAME, EXIT, FORCEWALLS };
 		CMenuNode(sf::Text nodeText, sf::Vector2f pos, CMenuNode *parent, callbackType buttonCallback = NULLCALL);
-		CMenuNode(sf::Text nodeText, sf::Vector2f pos, callbackType buttonCallback = NULLCALL);
+		CMenuNode(sf::Text nodeText, sf::Vector2f pos, callbackType buttonCallback = NULLCALL); 
+		CMenuNode() { rootNode = true; } //RootNode Creation
 		~CMenuNode();
-		sf::Text getText() const { return nodeText_; };
+		sf::Text getText() { return nodeText_; };
 		CMenuNode *getParentNode() const { return parentNode_; }
 		CMenuNode *fetchNode(int nodeID) const { return childNodes_[nodeID];}
 		CMenuNode *getSelectedNode() { return selectedNode_; }
@@ -36,6 +37,6 @@ class CMenuNode {
 		CMenuNode *selectedNode_ = nullptr;
 		CMenuNode *parentNode_ = nullptr;
 		callbackType callID_ = callbackType::NULLCALL;
-
+		bool rootNode = false;
 };
 
