@@ -17,6 +17,8 @@ class CMenuNode {
 		CMenuNode *fetchNode(int nodeID) const { return childNodes_[nodeID];}
 		CMenuNode *getSelectedNode() { return selectedNode_; }
 
+		callbackType getCallBack() const { return callID_; }
+
 		sf::Vector2f getPosition() const { return position_; }
 
 
@@ -26,8 +28,9 @@ class CMenuNode {
 
 		void selectNextNode();
 		void selectPreviousNode();
+		void deselectNode();
 
-		void pressNode();
+		void enterNode();
 
 	private:
 

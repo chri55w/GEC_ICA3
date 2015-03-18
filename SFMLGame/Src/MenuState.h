@@ -17,33 +17,15 @@ class CMenuState : public CState {
 		void onRender(sf::RenderWindow& window, int s_height, int s_width);
 
 	private:
-		CMenuNode *loadMapNode = nullptr;
-		CMenuNode *settingsNode = nullptr;
 		CMenuNode *currentNode_ = nullptr; 
 		CMenuNode *rootNode_ = nullptr;
 
 		sf::Font font;
 		enum direction {UP, DOWN, LEFT};
 
-		struct textObj {
-			sf::Text text;
-			bool selectable;
-			int selectCondition;
-
-		};
-
-		std::vector<textObj> menuTexts;
-		std::vector<bool> selectConditions;
-
 		bool keyPressed = false;
 		bool forceSurroundingWalls = true;
 
-		int selectedText;
-
-		void newText(std::string text, sf::Font, int size, float xPos, float yPos, bool canSelect = false, int selectCondition = 0);
-		void resetSelectedText();
-		void tryMoveMenu(direction moveDir);
-		void selectMenuItem();
-		bool stringContains(std::string stringToCheck, std::string stringToFind);
+		void checkMenuCallback(CMenuNode::callbackType callBack);
 };
 

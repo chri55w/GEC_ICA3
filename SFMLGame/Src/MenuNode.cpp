@@ -1,4 +1,5 @@
 #include "MenuNode.h"
+#include <iostream>
 
 
 CMenuNode::CMenuNode(sf::Text nodeText, sf::Vector2f pos, CMenuNode::callbackType buttonCallback) {
@@ -29,13 +30,18 @@ void CMenuNode::addChildNode(sf::Text nodeText, sf::Vector2f pos, CMenuNode::cal
 	newNode->parentNode_ = this;
 
 	childNodes_.push_back(newNode);
-
-	if (selectedNode_ == nullptr) {
-		selectedNode_ = newNode;
+	if (rootNode) {
+		if (selectedNode_ == nullptr) {
+			selectedNode_ = newNode;
+			selectedNode_->nodeText_.setColor(sf::Color::Red);
+		}
 	}
 }
 
 void CMenuNode::selectNextNode() {
+	if (selectedNode_ == nullptr) {
+		return;
+	}
 	selectedNode_->nodeText_.setColor(sf::Color::White);
 	for (int i = 0; i < childNodes_.size(); i++) {
 		if (selectedNode_ == childNodes_[i]) {
@@ -51,10 +57,13 @@ void CMenuNode::selectNextNode() {
 }
 
 void CMenuNode::selectPreviousNode() {
+	if (selectedNode_ == nullptr) {
+		return;
+	}
 	selectedNode_->nodeText_.setColor(sf::Color::White);
 	for (int i = 0; i < childNodes_.size(); i++) {
 		if (selectedNode_ == childNodes_[i]) {
-			if (i > 1) {
+			if (i > 0) {
 				selectedNode_ = childNodes_[i - 1];
 			} else {
 				selectedNode_ = childNodes_[childNodes_.size()-1];
@@ -65,6 +74,19 @@ void CMenuNode::selectPreviousNode() {
 	}
 }
 
-void CMenuNode::pressNode() {
-
+void CMenuNode::deselectNode() {
+	if (selectedNode_ != nullptr) {
+		selectedNode_->nodeText_.setColor(sf::Color::White);
+		selectedNode_ = nullptr;
+	}
 }
+
+void CMenuNode::enterNode() {
+	std::string nodeText = this->nodeText_.getString();
+	if (childNodes_.size() > 0) {
+		selectedNode_ = childNodes_[0];
+		selectedNode_->nodeText_.setColor(sf::Color::Red);
+	}
+	std::cout << "Entered Node: " << (std::string)this->nodeText_.getString() << std::endl;
+}
+
