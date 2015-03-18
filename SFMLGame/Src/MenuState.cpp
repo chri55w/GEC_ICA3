@@ -18,7 +18,7 @@ void CMenuState::onCreate() {
 
 	rootNode_->addChildNode(sf::Text("Load Map", font, 25), sf::Vector2f(50.0f, 350.0f), CMenuNode::NULLCALL);
 	rootNode_->addChildNode(sf::Text("Settings", font, 25), sf::Vector2f(50.0f, 375.0f), CMenuNode::NULLCALL);
-	rootNode_->addChildNode(sf::Text("Exit", font, 25), sf::Vector2f(50.0f, 400.0f), CMenuNode::NULLCALL);
+	rootNode_->addChildNode(sf::Text("Exit", font, 25), sf::Vector2f(50.0f, 400.0f), CMenuNode::EXIT);
 
 	std::vector<std::string> mapNames = MAP.loadAllMapNames("..\\Maps", "map");
 	float yPos = 362.5f - (mapNames.size() * 15) / 2;
@@ -62,7 +62,7 @@ void CMenuState::onRender(sf::RenderWindow& window, int s_height, int s_width) {
 }
 void CMenuState::onUpdate() {
 	//Check for text button clicks
-	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
 		keyPressed = false;
 	}	
 	if (!keyPressed) {	
@@ -85,6 +85,14 @@ void CMenuState::onUpdate() {
 			if (currentNode_->getParentNode() != nullptr) {
 				currentNode_->deselectNode();
 				currentNode_ = currentNode_->getParentNode();
+			}
+			keyPressed = true;
+		} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+			if (currentNode_->getSelectedNode() != nullptr) {
+				if (currentNode_->getSelectedNode()->countChildren() > 0) {
+					currentNode_ = currentNode_->getSelectedNode();
+					currentNode_->enterNode();
+				}
 			}
 			keyPressed = true;
 		}
