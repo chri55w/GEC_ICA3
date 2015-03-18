@@ -12,7 +12,7 @@ class CMenuNode {
 		CMenuNode(sf::Text nodeText, sf::Vector2f pos, callbackType buttonCallback = NULLCALL); 
 		CMenuNode() { rootNode = true; } //RootNode Creation
 		~CMenuNode();
-		sf::Text getText() { return nodeText_; };
+		sf::Text *getText() { return nodeText_; };
 		CMenuNode *getParentNode() const { return parentNode_; }
 		CMenuNode *fetchNode(int nodeID) const { return childNodes_[nodeID];}
 		CMenuNode *getSelectedNode() { return selectedNode_; }
@@ -34,7 +34,7 @@ class CMenuNode {
 
 	private:
 
-		sf::Text nodeText_;
+		sf::Text *nodeText_ = nullptr;
 		sf::Vector2f position_;
 		std::vector<CMenuNode*> childNodes_;
 		CMenuNode *selectedNode_ = nullptr;

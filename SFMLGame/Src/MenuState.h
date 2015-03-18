@@ -26,6 +26,6 @@ class CMenuState : public CState {
 		bool keyPressed = false;
 		bool forceSurroundingWalls = true;
 
-		void checkMenuCallback(CMenuNode::callbackType callBack);
+		void checkMenuCallback(CMenuNode::callbackType callBack, CMenuNode *node);
 };
 

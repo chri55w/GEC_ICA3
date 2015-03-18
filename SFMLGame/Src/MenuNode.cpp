@@ -3,20 +3,20 @@
 
 
 CMenuNode::CMenuNode(sf::Text nodeText, sf::Vector2f pos, CMenuNode::callbackType buttonCallback) {
-	nodeText_ = nodeText;
+	nodeText_ = new sf::Text(nodeText);
 	callID_ = buttonCallback;
 	position_ = pos;
-	nodeText_.setPosition(pos);
-	nodeText_.setColor(sf::Color::White);
+	nodeText_->setPosition(pos);
+	nodeText_->setColor(sf::Color::White);
 }
 
 CMenuNode::CMenuNode(sf::Text nodeText, sf::Vector2f pos, CMenuNode *parent, CMenuNode::callbackType buttonCallback) {
-	nodeText_ = nodeText;
+	nodeText_ = new sf::Text(nodeText);
 	parentNode_ = parent;
 	callID_ = buttonCallback;
 	position_ = pos;
-	nodeText_.setPosition(pos);
-	nodeText_.setColor(sf::Color::White);
+	nodeText_->setPosition(pos);
+	nodeText_->setColor(sf::Color::White);
 }
 
 CMenuNode::~CMenuNode() {
@@ -33,7 +33,7 @@ void CMenuNode::addChildNode(sf::Text nodeText, sf::Vector2f pos, CMenuNode::cal
 	if (rootNode) {
 		if (selectedNode_ == nullptr) {
 			selectedNode_ = newNode;
-			selectedNode_->nodeText_.setColor(sf::Color::Red);
+			selectedNode_->nodeText_->setColor(sf::Color::Red);
 		}
 	}
 }
@@ -42,7 +42,7 @@ void CMenuNode::selectNextNode() {
 	if (selectedNode_ == nullptr) {
 		return;
 	}
-	selectedNode_->nodeText_.setColor(sf::Color::White);
+	selectedNode_->nodeText_->setColor(sf::Color::White);
 	for (int i = 0; i < childNodes_.size(); i++) {
 		if (selectedNode_ == childNodes_[i]) {
 			if (i < childNodes_.size() - 1) {
@@ -50,7 +50,7 @@ void CMenuNode::selectNextNode() {
 			} else {
 				selectedNode_ = childNodes_[0];
 			}
-			selectedNode_->nodeText_.setColor(sf::Color::Red);
+			selectedNode_->nodeText_->setColor(sf::Color::Red);
 			return;
 		}
 	}
@@ -60,7 +60,7 @@ void CMenuNode::selectPreviousNode() {
 	if (selectedNode_ == nullptr) {
 		return;
 	}
-	selectedNode_->nodeText_.setColor(sf::Color::White);
+	selectedNode_->nodeText_->setColor(sf::Color::White);
 	for (int i = 0; i < childNodes_.size(); i++) {
 		if (selectedNode_ == childNodes_[i]) {
 			if (i > 0) {
@@ -68,7 +68,7 @@ void CMenuNode::selectPreviousNode() {
 			} else {
 				selectedNode_ = childNodes_[childNodes_.size()-1];
 			}
-			selectedNode_->nodeText_.setColor(sf::Color::Red);
+			selectedNode_->nodeText_->setColor(sf::Color::Red);
 			return;
 		}
 	}
@@ -76,17 +76,17 @@ void CMenuNode::selectPreviousNode() {
 
 void CMenuNode::deselectNode() {
 	if (selectedNode_ != nullptr) {
-		selectedNode_->nodeText_.setColor(sf::Color::White);
+		selectedNode_->nodeText_->setColor(sf::Color::White);
 		selectedNode_ = nullptr;
 	}
 }
 
 void CMenuNode::enterNode() {
-	std::string nodeText = this->nodeText_.getString();
+	std::string nodeText = this->nodeText_->getString();
 	if (childNodes_.size() > 0) {
 		selectedNode_ = childNodes_[0];
-		selectedNode_->nodeText_.setColor(sf::Color::Red);
+		selectedNode_->nodeText_->setColor(sf::Color::Red);
 	}
-	std::cout << "Entered Node: " << (std::string)this->nodeText_.getString() << std::endl;
+	std::cout << "Entered Node: " << (std::string)this->nodeText_->getString() << std::endl;
 }
 
