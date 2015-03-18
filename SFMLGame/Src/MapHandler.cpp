@@ -110,16 +110,16 @@ void CMapHandler::parseMapDrawData() {
 			newMapPixel->x_pos = currX;
 			newMapPixel->y_pos = currY;
 			if (data == '@') {
-				newMapPixel->pixel_colour = sf::Color::Red;
+				newMapPixel->pixel_colour = sf::Color::Black;
 			} else if (data == 'W') {
 				newMapPixel->pixel_colour = sf::Color::Blue;
 			} else if (data == 'T') {
-				newMapPixel->pixel_colour = sf::Color::Yellow;
+				newMapPixel->pixel_colour = sf::Color::Green;
 			}
 			mapDrawData.push_back(newMapPixel);
 		}
 		
-		if (currX < 512-1) {
+		if (currX < mapWidth-1) {
 			currX++;
 		} else {
 			currX = 0;
