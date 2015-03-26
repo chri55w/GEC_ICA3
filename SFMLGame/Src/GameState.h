@@ -13,9 +13,9 @@ class CGameState : public CState {
 		void onEnter();
 		void onExit();
 		void onUpdate();
-		void onRender(sf::RenderWindow& window, int s_height, int s_width);
+		void onRender(sf::RenderWindow& window);
 
 	private:
-
+		sf::VertexArray mapImage;
 };
 

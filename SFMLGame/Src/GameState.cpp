@@ -15,18 +15,9 @@ void CGameState::onDestroy() {
 
 }
 void CGameState::onEnter() {
-
-}
-void CGameState::onExit() {
-
-}
-void CGameState::onRender(sf::RenderWindow& window, int s_height, int s_width) {
-	window.clear(sf::Color::White);
-
-
 	std::vector<CMapHandler::mapPixel*> mapDrawData = MAP.getMapDrawData();
 
-	sf::VertexArray mapImage(sf::Points, mapDrawData.size() * 4);
+	mapImage = sf::VertexArray(sf::Points, mapDrawData.size() * 4);
 
 	int mapOffsetX = (s_width - MAP.getMapWidth()) / 2;
 	int mapOffsetY = (s_height - MAP.getMapHeight()) / 2;
@@ -36,6 +27,13 @@ void CGameState::onRender(sf::RenderWindow& window, int s_height, int s_width) {
 		mapImage[i].position = sf::Vector2f(pixel->x_pos + mapOffsetX, pixel->y_pos + mapOffsetY);
 		mapImage[i].color = pixel->pixel_colour;
 	}
+
+}
+void CGameState::onExit() {
+
+}
+void CGameState::onRender(sf::RenderWindow& window) {
+	window.clear(sf::Color::White);
 
 	window.draw(mapImage);
 	window.display();

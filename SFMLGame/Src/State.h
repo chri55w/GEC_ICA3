@@ -10,5 +10,11 @@ class CState {
 		virtual void onEnter() = 0;
 		virtual void onExit() = 0;
 		virtual void onUpdate() = 0;
-		virtual void onRender(sf::RenderWindow& window, int s_height, int s_width) = 0;
+		virtual void onRender(sf::RenderWindow& window) = 0;
+
+		void setScreenDimensions(int screenHeight, int screenWidth)  { s_width = screenWidth; s_height = screenHeight; }
+
+	protected:
+		int s_width;
+		int s_height;
 };

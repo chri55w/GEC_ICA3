@@ -21,9 +21,10 @@ CStateHandler::~CStateHandler() {
 	}
 }
 //initialise states on creation and run the on create function.
-void CStateHandler::initState(std::string stateName, CState *newState) {
+void CStateHandler::initState(std::string stateName, CState *newState, int screenHeight, int screenWidth) {
 	myStates_[stateName] = newState;
 	newState->onCreate();
+	newState->setScreenDimensions(screenHeight, screenWidth);
 }
 //Destroy a state
 void CStateHandler::destroyState(std::string stateName) {
@@ -57,8 +58,8 @@ void CStateHandler::updateCurrState() {
 	}
 }
 //render the state you are currently in
-void CStateHandler::renderCurrState(sf::RenderWindow& window, int s_height, int s_width) {
+void CStateHandler::renderCurrState(sf::RenderWindow& window) {
 	if (currentState != nullptr) {
-		currentState->onRender(window, s_height, s_width);
+		currentState->onRender(window);
 	}
 }

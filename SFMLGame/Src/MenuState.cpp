@@ -20,7 +20,7 @@ void CMenuState::onCreate() {
 	rootNode_->addChildNode(sf::Text("Settings", font, 25), sf::Vector2f(50.0f, 375.0f), CMenuNode::NULLCALL);
 	rootNode_->addChildNode(sf::Text("Exit", font, 25), sf::Vector2f(50.0f, 400.0f), CMenuNode::EXIT);
 
-	std::vector<std::string> mapNames = MAP.loadAllMapNames("..\\Maps", "map");
+	std::vector<std::string> mapNames = MAP.loadAllMaps("..\\Maps", "map");
 	float yPos = 362.5f - (mapNames.size() * 15) / 2;
 	for (std::string name : mapNames) {
 		rootNode_->fetchNode(0)->addChildNode(sf::Text(name, font, 15), sf::Vector2f(200.0f, yPos), CMenuNode::STARTGAME);
@@ -28,6 +28,7 @@ void CMenuState::onCreate() {
 	}
 
 	rootNode_->fetchNode(1)->addChildNode(sf::Text("Force Walls : True", font, 15), sf::Vector2f(200.0f, 380.0f), CMenuNode::FORCEWALLS);
+	MAP.updateMapEdges(forceSurroundingWalls);
 
 }
 void CMenuState::onDestroy() {
@@ -39,7 +40,7 @@ void CMenuState::onEnter() {
 void CMenuState::onExit() {
 
 }
-void CMenuState::onRender(sf::RenderWindow& window, int s_height, int s_width) {
+void CMenuState::onRender(sf::RenderWindow& window) {
 	window.clear();
 	CMenuNode *renderNode = rootNode_;
 	while (renderNode->countChildren() > 0) {
@@ -110,16 +111,18 @@ void CMenuState::checkMenuCallback(CMenuNode::callbackType callBack, CMenuNode *
 		case CMenuNode::FORCEWALLS:
 			if (forceSurroundingWalls == true) {
 				forceSurroundingWalls = false;
+				MAP.updateMapEdges(forceSurroundingWalls);
 				node->getText()->setString("Force Walls : False");
 			} else {
 				forceSurroundingWalls = true;
+				MAP.updateMapEdges(forceSurroundingWalls);
 				node->getText()->setString("Force Walls : True");
 			}
 			std::cout << "Force Walls Call" << std::endl;
 			break;
 		case CMenuNode::STARTGAME:
 			std::cout << "Calling Map Parser for Map: " << std::string(node->getText()->getString()) << std::endl;
-			MAP.parseMap(node->getText()->getString(), forceSurroundingWalls);
+			MAP.setCurrentMap(node->getText()->getString());
 			STATEHANDLER.changeState("gameState");
 			std::cout << "Start Game Called" << std::endl;
 			break;

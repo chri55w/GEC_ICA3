@@ -9,9 +9,9 @@ public:
 	static CStateHandler &getInstance();
 	~CStateHandler();
 
-	void initState(std::string stateName, CState *newState);
+	void initState(std::string stateName, CState *newState, int screenHeight, int screenWidth);
 	void destroyState(std::string stateName);
-	void renderCurrState(sf::RenderWindow& window, int s_height, int s_width);
+	void renderCurrState(sf::RenderWindow& window);
 	void updateCurrState();
 	void changeState(std::string stateName);
 
