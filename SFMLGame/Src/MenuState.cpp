@@ -12,7 +12,7 @@ CMenuState::~CMenuState() {
 void CMenuState::onCreate() {
 
 	font.loadFromFile("..\\Fonts\\ariel.ttf");
-
+	
 	rootNode_ = new CMenuNode();
 	currentNode_ = rootNode_;
 

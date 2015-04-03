@@ -17,5 +17,12 @@ class CGameState : public CState {
 
 	private:
 		sf::VertexArray mapImage;
+
+		sf::Font font;
+		sf::Text *textTip = nullptr;
+
+		bool exploring = true;
+
+		void tryRandomPoint(int randX, int randY);
 };
 
