@@ -17,6 +17,7 @@ class CMapHandler {
 		std::vector<std::string> loadAllMaps(std::string directory, std::string extension);
 		
 		std::vector<mapPixel*> getMapDrawData() const { if (currentMap != nullptr) { return currentMap->mapDrawData; } else { std::vector < mapPixel* > emptyDraw; return emptyDraw; } }
+		char getMapData(int offset) const { if (currentMap != nullptr) { return currentMap->mapData[offset]; } else { return '@'; } }
 
 		int getMapWidth() const { if (currentMap != nullptr) { return currentMap->mapWidth; } else { return 0; } }
 		int getMapHeight() const { if (currentMap != nullptr) { return currentMap->mapHeight; } else { return 0; } }

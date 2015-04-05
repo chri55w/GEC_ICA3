@@ -52,9 +52,9 @@ void CStateHandler::changeState(std::string stateName) {
 	}
 }
 //update the state you are currently in
-void CStateHandler::updateCurrState() {
+void CStateHandler::updateCurrState(sf::RenderWindow& window) {
 	if (currentState != nullptr) {
-		currentState->onUpdate();
+		currentState->onUpdate(window);
 	}
 }
 //render the state you are currently in

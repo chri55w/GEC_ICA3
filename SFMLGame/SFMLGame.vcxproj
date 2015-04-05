@@ -19,20 +19,24 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Src\RRTNode.cpp" />
     <ClCompile Include="Src\GameState.cpp" />
     <ClCompile Include="Src\MapHandler.cpp" />
     <ClCompile Include="Src\Main.cpp" />
     <ClCompile Include="Src\MenuNode.cpp" />
     <ClCompile Include="Src\MenuState.cpp" />
     <ClCompile Include="Src\StateHandler.cpp" />
+    <ClCompile Include="Src\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\RRTNode.h" />
     <ClInclude Include="Src\GameState.h" />
     <ClInclude Include="Src\MapHandler.h" />
     <ClInclude Include="Src\MenuNode.h" />
     <ClInclude Include="Src\MenuState.h" />
     <ClInclude Include="Src\State.h" />
     <ClInclude Include="Src\StateHandler.h" />
+    <ClInclude Include="Src\Vector2D.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FD5AA415-17FB-45E6-9043-9CF28993D822}</ProjectGuid>

@@ -13,7 +13,7 @@ class CMenuState : public CState {
 		void onDestroy();
 		void onEnter();
 		void onExit();
-		void onUpdate();
+		void onUpdate(sf::RenderWindow& window);
 		void onRender(sf::RenderWindow& window);
 
 	private:

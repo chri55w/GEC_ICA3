@@ -12,7 +12,7 @@ public:
 	void initState(std::string stateName, CState *newState, int screenHeight, int screenWidth);
 	void destroyState(std::string stateName);
 	void renderCurrState(sf::RenderWindow& window);
-	void updateCurrState();
+	void updateCurrState(sf::RenderWindow& window);
 	void changeState(std::string stateName);
 
 protected:

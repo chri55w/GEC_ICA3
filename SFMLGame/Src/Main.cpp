@@ -17,6 +17,8 @@
 
 int main() {
 
+	sf::Clock tickTimer;
+
 	int screenHeight = 900;
 	int screenWidth = 650;
 
@@ -38,7 +40,10 @@ int main() {
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
-		STATEHANDLER.updateCurrState();
+		if (tickTimer.getElapsedTime().asMilliseconds() > 0) {
+			STATEHANDLER.updateCurrState(window);
+			tickTimer.restart();
+		}
 		STATEHANDLER.renderCurrState(window);
 	}
 	return 0;

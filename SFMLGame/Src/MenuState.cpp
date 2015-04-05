@@ -61,7 +61,7 @@ void CMenuState::onRender(sf::RenderWindow& window) {
 	window.display();
 
 }
-void CMenuState::onUpdate() {
+void CMenuState::onUpdate(sf::RenderWindow& window) {
 	//Check for text button clicks
 	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
 		keyPressed = false;
