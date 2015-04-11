@@ -13,6 +13,7 @@
 #include "StateHandler.h"
 #include "MenuState.h"
 #include "GameState.h"
+#include "DemoState.h"
 #include "MapHandler.h"
 
 int main() {
@@ -28,6 +29,7 @@ int main() {
 	//Initialise All States
 	STATEHANDLER.initState("menuState", new CMenuState, screenHeight, screenWidth);
 	STATEHANDLER.initState("gameState", new CGameState, screenHeight, screenWidth);
+	STATEHANDLER.initState("demoState", new CDemoState, screenHeight, screenWidth);
 
 	//Set Starting State
 	STATEHANDLER.changeState("menuState");
@@ -40,6 +42,12 @@ int main() {
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
+
+		//Should you need to slow things down increase the '> 0' below to the
+		//		number of miliseconds you require between each game tick. 
+
+		//HOWEVER this will have cause issues with the responsivity to key 
+		//		presses and mouse clicks
 		if (tickTimer.getElapsedTime().asMilliseconds() > 0) {
 			STATEHANDLER.updateCurrState(window);
 			tickTimer.restart();

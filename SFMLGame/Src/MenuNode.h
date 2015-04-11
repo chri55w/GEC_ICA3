@@ -7,7 +7,7 @@
 class CMenuNode {
 	public:
 
-		enum callbackType { NULLCALL, STARTGAME, EXIT, FORCEWALLS };
+		enum callbackType { NULLCALL, STARTGAME, STARTDEMO, EXIT, FORCEWALLS };
 		CMenuNode(sf::Text nodeText, sf::Vector2f pos, CMenuNode *parent, callbackType buttonCallback = NULLCALL);
 		CMenuNode(sf::Text nodeText, sf::Vector2f pos, callbackType buttonCallback = NULLCALL); 
 		CMenuNode() { rootNode = true; } //RootNode Creation

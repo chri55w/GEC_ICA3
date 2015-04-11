@@ -27,7 +27,7 @@ class CMapHandler {
 		void updateMapEdges(bool forcedEdges);
 
 	protected:
-		CMapHandler();
+		CMapHandler() {};
 
 	private:
 		static CMapHandler *instance_;
