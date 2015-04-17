@@ -13,7 +13,6 @@
 #include "StateHandler.h"
 #include "MenuState.h"
 #include "GameState.h"
-#include "DemoState.h"
 #include "MapHandler.h"
 
 int main() {
@@ -29,7 +28,6 @@ int main() {
 	//Initialise All States
 	STATEHANDLER.initState("menuState", new CMenuState, screenHeight, screenWidth);
 	STATEHANDLER.initState("gameState", new CGameState, screenHeight, screenWidth);
-	STATEHANDLER.initState("demoState", new CDemoState, screenHeight, screenWidth);
 
 	//Set Starting State
 	STATEHANDLER.changeState("menuState");

@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Src\DemoState.cpp" />
     <ClCompile Include="Src\RRTNode.cpp" />
     <ClCompile Include="Src\GameState.cpp" />
     <ClCompile Include="Src\MapHandler.cpp" />
@@ -30,7 +29,6 @@
     <ClCompile Include="Src\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Src\DemoState.h" />
     <ClInclude Include="Src\RRTNode.h" />
     <ClInclude Include="Src\GameState.h" />
     <ClInclude Include="Src\MapHandler.h" />

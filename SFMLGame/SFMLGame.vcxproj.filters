@@ -67,9 +67,6 @@
     <ClCompile Include="Src\Vector2D.cpp">
       <Filter>Utilities\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Src\DemoState.cpp">
-      <Filter>State Machine\Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\MenuState.h">
@@ -95,9 +92,6 @@
     </ClInclude>
     <ClInclude Include="Src\Vector2D.h">
       <Filter>Utilities\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\DemoState.h">
-      <Filter>State Machine\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

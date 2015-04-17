@@ -13,10 +13,9 @@ void CMenuState::onCreate() {
 	currentNode_ = rootNode_;
 
 	//Create the main menu options
-	rootNode_->addChildNode(sf::Text("Load Map", font, 25), sf::Vector2f(50.0f, 325.0f), CMenuNode::NULLCALL);
-	rootNode_->addChildNode(sf::Text("Demo Game", font, 25), sf::Vector2f(50.0f, 350.0f), CMenuNode::NULLCALL);
-	rootNode_->addChildNode(sf::Text("Settings", font, 25), sf::Vector2f(50.0f, 375.0f), CMenuNode::NULLCALL);
-	rootNode_->addChildNode(sf::Text("Exit", font, 25), sf::Vector2f(50.0f, 400.0f), CMenuNode::EXIT);
+	rootNode_->addChildNode(sf::Text("Load Map", font, 25), sf::Vector2f(50.0f, 335.0f), CMenuNode::NULLCALL);
+	rootNode_->addChildNode(sf::Text("Settings", font, 25), sf::Vector2f(50.0f, 365.0f), CMenuNode::NULLCALL);
+	rootNode_->addChildNode(sf::Text("Exit", font, 25), sf::Vector2f(50.0f, 395.0f), CMenuNode::EXIT);
 
 	//Load all maps in and take the names of them, 
 	//		push names into the load map node as sub nodes.
@@ -26,14 +25,8 @@ void CMenuState::onCreate() {
 		rootNode_->fetchNode(0)->addChildNode(sf::Text(name, font, 15), sf::Vector2f(200.0f, yPos), CMenuNode::STARTGAME);
 		yPos += 15;
 	}
-	yPos = 362.5f - (mapNames.size() * 15) / 2;
-	for (std::string name : mapNames) {
-		rootNode_->fetchNode(1)->addChildNode(sf::Text(name, font, 15), sf::Vector2f(200.0f, yPos), CMenuNode::STARTDEMO);
-		yPos += 15;
-	}
-
 	//push a setting into the settings node
-	rootNode_->fetchNode(2)->addChildNode(sf::Text("Force Walls : True", font, 15), sf::Vector2f(200.0f, 380.0f), CMenuNode::FORCEWALLS);
+	rootNode_->fetchNode(1)->addChildNode(sf::Text("Force Walls : True", font, 15), sf::Vector2f(200.0f, 380.0f), CMenuNode::FORCEWALLS);
 
 	//Update the map edges to force walls - Could use some optimisation
 	MAP.updateMapEdges(forceSurroundingWalls);

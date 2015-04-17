@@ -22,7 +22,7 @@ class CGameState : public CState {
 		//Max and Minimum distances between nodes.
 		int minDist = 5;
 		int maxDist = 25;
-		int nodeCollisionSqrRadius = 3;
+		int nodeCollisionSqrRadius = 4;
 
 		//Offset of the map to draw each map central to the screen.
 		int mapOffsetX = 0;
@@ -39,8 +39,12 @@ class CGameState : public CState {
 		sf::CircleShape nodeHighlight;
 		sf::CircleShape randHighlight;
 		sf::CircleShape closestHighlight;
+		sf::CircleShape playerShape;
 		sf::RectangleShape startPosHighlight;
 		sf::RectangleShape endPosHighlight;
+
+		int playerLastNodePassed = 0;
+		float distAlongVector = 0.0;
 		
 		//Font and Text objects for drawing tips and node counts
 		//		as well as the vector of all tip texts.

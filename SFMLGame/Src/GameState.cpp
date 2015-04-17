@@ -10,7 +10,7 @@ void CGameState::onDestroy() {
 
 }
 void CGameState::onEnter() {
-	//Reset Node Position Vector and the current node count
+	//Reset Node Position Vector and the current node  count
 	nodePositions.clear();
 	nodeCount = 0;
 	path.clear();
@@ -27,8 +27,12 @@ void CGameState::onEnter() {
 	randHighlight.setOrigin(1.5, 1.5);
 
 	closestHighlight = sf::CircleShape(3.0);
-	closestHighlight.setFillColor(sf::Color(222,29,29));
+	closestHighlight.setFillColor(sf::Color(222, 29, 29));
 	closestHighlight.setOrigin(1.5, 1.5);
+
+	playerShape = sf::CircleShape(7.0);
+	playerShape.setFillColor(sf::Color(222, 29, 29));
+	playerShape.setOrigin(3.5, 3.5);
 
 	startPosHighlight = sf::RectangleShape(sf::Vector2f(4, 4));
 	startPosHighlight.setFillColor(sf::Color(100, 100, 100));
@@ -109,6 +113,8 @@ void CGameState::onRender(sf::RenderWindow& window) {
 	
 	window.draw(pathImage);
 
+	window.draw(playerShape);
+
 	window.display();
 
 }
@@ -126,12 +132,19 @@ void CGameState::onUpdate(sf::RenderWindow& window) {
 	} else if (exploring) {
 		selectedText = 2;
 		tryRandomPoint(CVector2D((float)(rand() % MAP.getMapWidth()), (float)(rand() % MAP.getMapHeight())));
-
 	//If the system is no longer exploring an end node has been 
 	//		selected so process the quickest path to the destination.
-	} else if (!destinationReached) {
-		//TODO: find path!
-		selectedText = 3;
+	}
+	else if (path.size() != 0) {
+		//Move a character along the path
+		/*CVector2D direction = CVector2D(0, 0);
+		direction.asUnitVector(path[playerLastNodePassed], path[playerLastNodePassed + 1]);
+		int playerX = playerShape.getPosition().x;
+		int playerY = playerShape.getPosition().y;
+
+		playerX 
+		playerShape.setPosition(playerShape.getPosition() + direction);*/
+
 	} else {
 		selectedText = 0;
 	}
